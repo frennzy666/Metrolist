@@ -54,7 +54,7 @@ open class KizzyRPC(token: String) {
         type: Type = Type.LISTENING,
         streamUrl: String? = null,
         applicationId: String? = null,
-        status: String? = "online",
+        status: String? = "idle",
         since: Long? = null,
     ) {
         if (!isRpcRunning()) {
@@ -82,7 +82,7 @@ open class KizzyRPC(token: String) {
             ),
             afk = true,
             since = since,
-            status = status ?: "online"
+            status = status ?: "idle"
         )
         discordWebSocket.sendActivity(presence)
     }
