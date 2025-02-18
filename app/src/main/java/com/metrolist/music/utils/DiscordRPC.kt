@@ -5,12 +5,15 @@ import com.metrolist.music.R
 import com.metrolist.music.db.entities.Song
 import com.my.kizzy.rpc.KizzyRPC
 import com.my.kizzy.rpc.RpcImage
+import java.util.concurrent.TimeUnit
 
 class DiscordRPC(
     val context: Context,
     token: String,
 ) : KizzyRPC(token) {
     suspend fun updateSong(song: Song) = runCatching {
+        val startTime = System.currentTimeMillis()
+        val endTime = startTime + TimeUnit.SECONDS.toMillis(song.song.duration.toLong())
         setActivity(
             name = context.getString(R.string.app_name).removeSuffix(" Debug"),
             details = song.song.title,
@@ -23,7 +26,7 @@ class DiscordRPC(
                 "Listen on Yt Music" to "https://music.youtube.com/watch?v=${song.song.id}"
             ),
             type = Type.LISTENING,
-            since = System.currentTimeMillis(),
+            timestamps = Timestamps(startTime, endTime),
             applicationId = APPLICATION_ID
         )
     }
