@@ -12,6 +12,7 @@ class DiscordRPC(
     token: String,
 ) : KizzyRPC(token) {
     suspend fun updateSong(song: Song) = runCatching {
+        val startTime = System.currentTimeMillis()
         setActivity(
             name = context.getString(R.string.app_name).removeSuffix(" Debug"),
             details = song.song.title,
@@ -31,7 +32,6 @@ class DiscordRPC(
     }
 
     companion object {
-        private const val startTime = System.currentTimeMillis()
         private const val APPLICATION_ID = "1271273225120125040"
     }
 }
