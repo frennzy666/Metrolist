@@ -11,7 +11,8 @@ class DiscordRPC(
     val context: Context,
     token: String,
 ) : KizzyRPC(token) {
-    suspend fun updateSong(song: Song) = runCatching {        
+    suspend fun updateSong(song: Song) = runCatching {
+        val startTime = System.currentTimeMillis()
         setActivity(
             name = context.getString(R.string.app_name).removeSuffix(" Debug"),
             details = song.song.title,
@@ -24,7 +25,7 @@ class DiscordRPC(
                 "Listen on Yt Music" to "https://music.youtube.com/watch?v=${song.song.id}"
             ),
             type = Type.LISTENING,
-            startTime = System.currentTimeMillis(),
+            startTime = startTime,
             endTime = startTime + TimeUnit.SECONDS.toMillis(song.song.duration.toLong()),
             applicationId = APPLICATION_ID
         )
