@@ -69,7 +69,8 @@ open class KizzyRPC(token: String) {
                     type = type.value,
                     timestamps = Timestamps(
                         start = startTime,
-                        end = endTime),
+                        end = endTime
+                    ),
                     assets = Assets(
                         largeImage = largeImage?.resolveImage(kizzyRepository),
                         smallImage = smallImage?.resolveImage(kizzyRepository),
